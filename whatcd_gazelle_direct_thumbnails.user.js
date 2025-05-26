@@ -261,6 +261,14 @@ function LazyThumbnails(progress, backend, small_thumbnails, full_thumbnails, re
         },
     ];
 
+
+    this.deprecated_hosts = [
+        {
+            pattern: /(https?:\/\/)(jerking)\.empornium\.(ph|sx|is)\/images\/resize\/600(.*)/,
+            replace_pattern: '$1hamster.is/images$4',
+        },
+    ];
+
     this.create_img = function (src, small) {
         var $img = jQuery('<img>');
         var min_size = small ? '50px' : max_image_size + 'px';
@@ -309,6 +317,13 @@ function LazyThumbnails(progress, backend, small_thumbnails, full_thumbnails, re
                 // to hide categories if cover not exist
                 // when replace_categories is set
                 src = ''; //'/static/common/noartwork/noimage.png';
+            }
+
+            for (var i = 0; i < self.deprecated_hosts.length; i++) {
+              var item = self.deprecated_hosts[i];
+              if (item.pattern.test(src)) {
+                src = src.replace(item.pattern, item.replace_pattern)
+              }
             }
 
             var small = false;

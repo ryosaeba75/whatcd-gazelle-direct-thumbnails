@@ -4,7 +4,7 @@
 // @exclude     /https?://www\.empornium\.(is|sx)/torrents\.php\?id.*/
 // @include     /https?://www\.empornium\.(is|sx)/user\.php.*/
 // @include     /https?://www\.empornium\.(is|sx)/top10\.php.*/
-// @include     /https?://www\.empornium\.(is|sx)/collages\.php\?id.*/
+// @include     /https?://www\.empornium\.(is|sx)/collage/[0-9]*/
 // @include     /https?://femdomcult\.org/torrents\.php.*/
 // @exclude     /https?://femdomcult\.org/torrents\.php\?id.*/
 // @include     /https?://femdomcult\.org/user\.php.*/
@@ -98,6 +98,11 @@ GM_addStyle('' +
     '.overlay-category-small .cats_cols > div {' +
     '    width: 11px;' +
     '}' +
+    //Collage
+    '.overlay-category-small tr.torrent > td.center > img:first-child{' +
+    '    position: absolute;}' +
+    '.overlay-category-small tr.torrent > td.center :first-child{' +
+    '    height: 50px;  object-fit: cover;  object-position: 0% 0%;  width: 11px;}' +
     '.remove-category td > div[title],' +
     '.remove-category .cats_col  > div,' +
     '.remove-category .cats_cols > div {' +
@@ -183,6 +188,10 @@ function get_$category($row) {
         return $category;
 
     $category = jQuery('td > div[title]', $row).parent();
+    if ($category.length)
+        return $category;
+
+    $category = jQuery('td.center', $row);
     if ($category.length)
         return $category;
 

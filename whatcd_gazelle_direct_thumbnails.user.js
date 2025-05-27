@@ -264,7 +264,7 @@ function LazyThumbnails(progress, backend, small_thumbnails, full_thumbnails, re
 
     this.deprecated_hosts = [
         {
-            pattern: /(https?:\/\/)(jerking)\.empornium\.(ph|sx|is)\/images\/resize\/600(.*)/,
+            pattern: /(https?:\/\/)(jerking)\.empornium\.(ph|sx|is)\/images\/resize\/[0-9]*(.*)/,
             replace_pattern: '$1hamster.is/images$4',
         },
     ];
